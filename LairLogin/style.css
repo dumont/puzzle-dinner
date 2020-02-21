@@ -1,0 +1,90 @@
+body {
+  background-color: black;
+  background-image: radial-gradient(
+    rgba(0, 150, 0, 0.75), black 120%
+  );
+  animation: intruder 1s linear infinite;
+  animation-play-state: paused;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  padding: 2rem;
+  color: white;
+  font: 1.3rem Courier, monospace;
+  text-shadow: 0 0 5px #C8C8C8;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(black, 0.15),
+      rgba(black, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+  }
+}
+::selection {
+  background: #0080FF;
+  text-shadow: none;
+}
+pre {
+  margin: 0;
+}
+input[type=text], input[type=text]:focus {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: transparent;
+  font: 1.0rem Courier, monospace;
+  text-shadow: 0 0 1px #fff;
+  display: inline-block;
+  margin: 0px 0px 0px 5px;
+  width: 0px;
+}
+.cursor {
+  display: inline-block;
+}
+#cursor::after {
+  content: "";
+  /* position: absolute; */
+  top: 10px;   
+  left: -0.5ch;
+  display: inline-block;
+  background-color: white;
+  width: 1.0ch;
+  height: 1.5ch;
+  /* 
+  Animation paramaters:
+  blink = animation-name, 
+  1s = animation-duration, 
+  step-end = animation-timing-function,
+  infinite = animation-iteration-count
+  */
+  -webkit-animation: blink 1s step-end infinite;
+  animation: blink 1s step-end infinite;
+}
+
+@-webkit-keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes intruder {
+  0% { }
+  2% { background: transparent; }
+  50% { background: black; }
+  100% { background: red; } 
+}

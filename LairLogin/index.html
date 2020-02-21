@@ -1,0 +1,63 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<!-- The sample form that gets copied -->
+<div id="form" style="display:none">
+  <form name="myForm" action="" onsubmit="checkPassword(this);return false;">
+    <pre><output>Authentication required &gt;<input type="text" name="pwd" size="0" class="input" oninput="return adjustSize(this);"><div class="cursor"></div></output></pre>
+  </form>
+</div>
+<!-- The sample warning that gets copied -->
+<div id="warning" style="display:none;">
+    <pre><output>Access Denied!!! One attempt remaining...
+
+</output></pre>
+</div>
+
+<!-- The audio file that gets played -->
+<audio id="music">
+  <source src="audio.mp3" type="audio/mpeg">
+</audio>
+
+<!-- The initial page content -->
+<div id="content">
+<pre><output>
+SPECTRE Classified System
+=========================
+
+</output></pre>
+</div>
+<script>
+function adjustSize(form) {
+  form.form.pwd.style.width = ( form.form.pwd.value.length ) + "ch";
+}
+function checkPassword(form) {
+  if( form.pwd.value === 'foobar' ) {
+    document.body.style.animationPlayState = "running";
+    document.getElementById("music").play();
+  } else {
+    var warning = document.getElementById("warning").cloneNode(true);
+    warning.style.display = "block";
+    document.getElementById("content").appendChild( warning );
+    addLogin();
+  }
+}
+
+function addLogin() {
+  var login = document.getElementById("form").cloneNode(true);
+  login.style.display = "block";  
+  // remove any current cursor and set the new cursor
+  if( document.getElementById("cursor") ) {
+    document.getElementById("cursor").id = "notCursor";
+  }
+  login.getElementsByClassName("cursor")[0].id="cursor";
+  document.getElementById("content").appendChild( login ); 
+  login.getElementsByClassName("input")[0].focus();
+}
+window.onload = addLogin();
+</script>
+</body>
+</html>
